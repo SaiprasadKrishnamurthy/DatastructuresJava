@@ -1,5 +1,6 @@
 package linkedlists;
 
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -41,5 +42,42 @@ public class LinkedList {
         }
         builder.append("NIL");
         return builder.toString();
+    }
+
+    public Integer nth(int n, boolean fromLast) {
+        if (fromLast) {
+            LinkedNode p1 = head;
+            LinkedNode p2 = head;
+
+            // Move p1 n times
+            for (int i = -1; i < n; i++) {
+                if (p1 == null) throw new IndexOutOfBoundsException("n is more than the size of the list");
+                p1 = p1.getNext();
+            }
+            while (p1 != null) {
+                p1 = p1.getNext();
+                p2 = p2.getNext();
+            }
+            return p2.getData();
+        } else {
+            LinkedNode p1 = head;
+            LinkedNode curr = head;
+            for (int i = -1; i < n; i++) {
+                if (p1 == null) throw new IndexOutOfBoundsException("n is more than the size of the list");
+                curr = p1;
+                p1 = p1.getNext();
+            }
+            return curr.getData();
+        }
+    }
+
+    public int size() {
+        int size = 0;
+        LinkedNode curr = head;
+        while (curr != null) {
+            curr = curr.getNext();
+            size++;
+        }
+        return size;
     }
 }
