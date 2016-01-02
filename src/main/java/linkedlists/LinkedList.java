@@ -1,8 +1,5 @@
 package linkedlists;
 
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 /**
  * Created by saikris on 31/12/2015.
  */
@@ -79,5 +76,71 @@ public class LinkedList {
             size++;
         }
         return size;
+    }
+
+    public int mid() {
+        LinkedNode p1 = head;
+        LinkedNode p2 = head;
+
+        int counter = 0;
+        while (p1 != null) {
+            if (counter % 2 != 0) {
+                p2 = p2.getNext();
+            }
+            p1 = p1.getNext();
+            counter++;
+        }
+        return p2.getData();
+    }
+
+    public boolean isEqual(LinkedList other) {
+
+        LinkedNode curr = head;
+        LinkedNode otherNode = other.head;
+
+        while (curr != null && otherNode != null && curr.getData() == otherNode.getData()) {
+            curr = curr.getNext();
+            otherNode = otherNode.getNext();
+        }
+        return curr == null && otherNode == null;
+    }
+
+    public void reverse() {
+        LinkedNode next, curr = head;
+        while (curr != null) {
+            next = curr.getNext();
+            curr.setNext(curr.getPrev());
+            curr.setPrev(next);
+            head = curr;
+            curr = next;
+        }
+    }
+
+    public void reverseRecurse() {
+        reverseRecurse(head.getPrev(), head);
+    }
+
+    private void reverseRecurse(LinkedNode prev, LinkedNode curr) {
+        if (curr != null) {
+            head = curr;
+            reverseRecurse(curr, curr.getNext());
+            curr.setNext(prev);
+            if (prev != null) {
+                prev.setPrev(curr);
+            }
+        }
+    }
+
+
+    public void swapAdjacentPairs() {
+        LinkedNode p1 = head;
+
+        while (p1 != null && p1.getNext() != null) {
+            int temp = p1.getData();
+            int nextData = p1.getNext().getData();
+            p1.setData(nextData);
+            p1.getNext().setData(temp);
+            p1 = p1.getNext().getNext();
+        }
     }
 }

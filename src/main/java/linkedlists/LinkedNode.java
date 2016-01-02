@@ -5,7 +5,7 @@ package linkedlists;
  */
 public class LinkedNode {
 
-    private final Integer data;
+    private Integer data;
     private LinkedNode next;
     private LinkedNode prev;
 
@@ -32,5 +32,14 @@ public class LinkedNode {
 
     public void setPrev(LinkedNode prev) {
         this.prev = prev;
+    }
+
+    public void setData(Integer data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return data+"";
     }
 }
