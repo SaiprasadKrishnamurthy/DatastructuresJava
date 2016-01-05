@@ -1,6 +1,7 @@
 package stacks;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by saikris on 05/01/2016.
@@ -31,4 +32,36 @@ public class StackProblems {
         return paranthesisEvaluatorStack.isEmpty();
     }
 
+    public static String postfixOf(String p) {
+        Map<String, Integer> operatorsToPriorities = new HashMap<>();
+        operatorsToPriorities.put("+", 0);
+        operatorsToPriorities.put("-", 0);
+        operatorsToPriorities.put("*", 1);
+        operatorsToPriorities.put("/", 1);
+        StringBuilder result = new StringBuilder();
+        Stack<String> operatorsStack = new Stack<>();
+
+        String[] tokens = p.split("");
+
+        Stream.of(tokens)
+                .forEach(token -> {
+                    // Operand.
+                    if (!operatorsToPriorities.containsKey(token.trim())) {
+                        result.append(token.trim());
+                    } else {
+                        if (operatorsStack.isEmpty()) {
+                            operatorsStack.push(token.trim());
+                        } else {
+                            while (!operatorsStack.isEmpty() && operatorsToPriorities.get(token.trim()) <= operatorsToPriorities.get(operatorsStack.peek().trim())) {
+                                result.append(operatorsStack.pop().trim());
+                            }
+                            operatorsStack.push(token.trim());
+                        }
+                    }
+                });
+        while (!operatorsStack.isEmpty()) {
+            result.append(operatorsStack.pop());
+        }
+        return result.toString();
+    }
 }

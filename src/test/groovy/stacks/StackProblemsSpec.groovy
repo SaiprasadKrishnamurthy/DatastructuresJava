@@ -10,15 +10,27 @@ class StackProblemsSpec extends Specification {
 
     def "should check if the expression has a balanced set of parantheses for a valid expression "() {
         given: "an expression with a balanced set of paranthesis"
-            def inputExpression = "a((b+c)*{cd}+[ac])"
-        expect:
-            StackProblems.isParanthesisBalanced(inputExpression)
+        def inputExpression = "a((b+c)*{cd}+[ac])"
+        expect: "true"
+        StackProblems.isParanthesisBalanced(inputExpression)
     }
 
     def "should check if the expression has a balanced set of parantheses for an  invalid expression "() {
         given: "an expression with an unbalanced set of paranthesis"
-            def inputExpression = "a(()]"
+        def inputExpression = "a(()]"
+        expect: "false"
+        !StackProblems.isParanthesisBalanced(inputExpression)
+    }
+
+    def "should convert an infix to postfix notation for a simple expression "() {
+        def inputInfixExpression = "x * y / 5 * z + p"
+        def expectedPostfixExpression = "x y * 5 / z * p +"
+
+        given:
+        "a simple infix expression"
+
         expect:
-            !StackProblems.isParanthesisBalanced(inputExpression)
+        "the postfix notation"
+        StackProblems.postfixOf(inputInfixExpression) == expectedPostfixExpression.replace(" ", "")
     }
 }
