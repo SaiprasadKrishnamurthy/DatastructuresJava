@@ -15,7 +15,9 @@ evaluate spock as a test specification framework to be used in my opensource & s
     * Swap adjacent pairs.
 
 ## Stacks
-
+    * Paranthesis checker
+    * Infix to Postfix
+    * Postfix evaluator
 ## Queues
 
 ## Binary Search Trees
