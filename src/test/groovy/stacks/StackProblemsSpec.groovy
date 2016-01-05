@@ -33,4 +33,12 @@ class StackProblemsSpec extends Specification {
         "the postfix notation"
         StackProblems.postfixOf(inputInfixExpression) == expectedPostfixExpression.replace(" ", "")
     }
+
+    def "should find the min element efficiently"() {
+        given: "a stack of integers"
+        SmartStack stack = SmartStack.of(20, 6, 4, 10, 5, 100, 120, -1, -10, 200, 7, 6, 4, 0)
+
+        expect:
+        stack.min() == -10
+    }
 }

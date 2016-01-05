@@ -18,6 +18,7 @@ evaluate spock as a test specification framework to be used in my opensource & s
     * Paranthesis checker
     * Infix to Postfix
     * Postfix evaluator
+    * Min element of stack
 ## Queues
 
 ## Binary Search Trees
